@@ -3,10 +3,221 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>テスト</title>
+  <title>学生向け特典のご案内</title>
+  <meta name="description" content="（架空）学生向け特典の案内ページ" />
+  <style>
+    :root{
+      --bg:#0b0f17; --card:#121a2a; --text:#e7eefc; --muted:#9db0d0;
+      --line:#22314f; --accent:#8be9fd; --warn:#ffcc66;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; color:var(--text);
+      font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:radial-gradient(1000px 600px at 20% 0%, #142040, var(--bg));
+    }
+    .wrap{max-width:920px; margin:0 auto; padding:22px 16px 56px;}
+    .topbar{display:flex; justify-content:flex-end; margin-bottom:10px;}
+    .pill{
+      font-size:12px; padding:4px 10px; border-radius:999px;
+      border:1px solid rgba(139,233,253,.35);
+      background:rgba(139,233,253,.10); color:rgba(231,238,252,.95);
+      letter-spacing:.3px;
+      user-select:none;
+    }
+
+    .hero{
+      display:grid; gap:12px;
+      padding:18px; border:1px solid var(--line); border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow:0 12px 40px rgba(0,0,0,.25);
+    }
+    .kicker{color:var(--muted); font-size:13px}
+    h1{margin:0; font-size:22px; letter-spacing:.2px}
+    .sub{margin:0; color:var(--muted); line-height:1.65}
+
+    .grid{display:grid; gap:12px; grid-template-columns:1fr;}
+    @media (min-width:860px){ .grid{grid-template-columns:1.25fr .75fr;}}
+
+    .card{
+      border:1px solid var(--line); border-radius:18px; padding:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+    }
+    .tag{display:inline-block; font-size:12px; padding:2px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted)}
+    .ad{
+      margin-top:10px; border:1px dashed rgba(255,255,255,.20);
+      border-radius:16px; padding:12px; background:rgba(0,0,0,.12);
+    }
+    .headline{font-weight:850; font-size:15px}
+    .copy{margin-top:6px; color:var(--muted); line-height:1.6; font-size:13px}
+
+    .ctaRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .btn{
+      appearance:none; border:1px solid var(--line); background:#101a2d;
+      color:var(--text); padding:10px 12px; border-radius:14px;
+      cursor:pointer; font-weight:700;
+    }
+    .btn.primary{border-color:rgba(139,233,253,.45); background:rgba(139,233,253,.12)}
+    .btn.warn{border-color:rgba(255,204,102,.50); background:rgba(255,204,102,.12)}
+    .btn:focus{outline:2px solid rgba(139,233,253,.35); outline-offset:2px}
+
+    details{
+      margin-top:12px;
+      border:1px solid rgba(255,204,102,.28);
+      background:rgba(255,204,102,.08);
+      border-radius:16px; padding:10px 12px;
+    }
+    summary{cursor:pointer; font-weight:800; color:#ffe1a6}
+    .checklist{display:grid; gap:8px; margin-top:10px}
+    .check{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px; border-radius:14px; border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .dot{width:10px; height:10px; border-radius:50%; margin-top:6px; background:rgba(255,204,102,.85)}
+    .check b{display:block}
+    .small{font-size:12px; color:var(--muted); margin-top:2px}
+
+    footer{margin-top:12px; color:var(--muted); font-size:12px; line-height:1.7}
+    a{color:var(--accent)}
+    code{background:rgba(255,255,255,.06); padding:2px 6px; border-radius:8px}
+
+    /* modal */
+    .modalBackdrop{
+      position:fixed; inset:0; display:none; place-items:center;
+      background:rgba(0,0,0,.55); z-index:999;
+      padding:16px;
+    }
+    .modal{
+      width:min(560px, 100%);
+      border:1px solid rgba(255,204,102,.35);
+      background:linear-gradient(180deg, rgba(18,26,42,.98), rgba(18,26,42,.92));
+      border-radius:18px; padding:14px;
+      box-shadow:0 20px 60px rgba(0,0,0,.45);
+    }
+    .modal h2{margin:0 0 8px; font-size:16px}
+    .modal p{margin:0; color:var(--muted); line-height:1.7; font-size:13px}
+    .modal .ctaRow{justify-content:flex-end; margin-top:12px}
+  </style>
 </head>
+
 <body>
-  <h1>表示できています</h1>
-  <p>これが見えたら Pages 設定と配置は正常です。</p>
+  <div class="wrap">
+    <div class="topbar">
+      <span class="pill" title="授業用のシミュレーション（クリック時に必ず開示）">SIMULATION</span>
+    </div>
+
+    <section class="hero">
+      <div class="kicker">学生向け特典（架空）</div>
+      <h1>【学生限定】通信費サポート特典のご案内</h1>
+      <p class="sub">
+        申し込み条件や適用範囲は、案内に沿ってご確認ください。<br/>
+        ※このページは<strong>入力・送信・決済・外部遷移</strong>を行いません（ボタンは解説表示のみ）。
+      </p>
+    </section>
+
+    <section class="grid" style="margin-top:14px">
+      <div class="card">
+        <span class="tag">案内ページ</span>
+
+        <div class="ad">
+          <div class="headline">【先着】学生の負担を“限界まで”減らす特典、対象者だけ案内</div>
+          <div class="copy">
+            ・本日中の手続きで優遇（理由の説明は省略）<br/>
+            ・友だち紹介で条件が変動（詳細は後述）<br/>
+            ・「無料」をうたうが、適用条件が多い（読み解きが必要）<br/>
+          </div>
+
+          <div class="ctaRow">
+            <button class="btn warn" id="applyBtn" type="button">今すぐ手続きする</button>
+            <button class="btn primary" id="openTips" type="button">注意点を見る</button>
+          </div>
+
+          <details id="tips">
+            <summary>注意点（赤旗チェック）</summary>
+            <div class="checklist">
+              <div class="check"><div class="dot"></div><div><b>断言・誇張が強い</b><div class="small">「永久」「絶対」などは根拠・条件が必須。</div></div></div>
+              <div class="check"><div class="dot"></div><div><b>緊急性で焦らせる</b><div class="small">「今日中」「先着」は判断力を落とす。</div></div></div>
+              <div class="check"><div class="dot"></div><div><b>条件が後出し</b><div class="small">無料でも「何が必要か」を明示しないのは危険。</div></div></div>
+              <div class="check"><div class="dot"></div><div><b>紹介・招待の圧</b><div class="small">実態が勧誘/拡散目的になりやすい。</div></div></div>
+              <div class="check"><div class="dot"></div><div><b>事業者情報が薄い</b><div class="small">運営者情報・解約条件・問い合わせは必須。</div></div></div>
+            </div>
+          </details>
+        </div>
+
+        <footer>
+          公開はGitHub PagesでOK：<code>index.html</code> 1枚で動きます。<br/>
+          ※実在サービスの模倣や個人情報の取得はしない構成です。
+        </footer>
+      </div>
+
+      <aside class="card">
+        <h2 style="margin:0 0 8px; font-size:16px">安全な行動</h2>
+        <ul style="margin:0; padding-left:18px; color:var(--muted); line-height:1.7; font-size:14px">
+          <li>焦らせる広告は<strong>即決しない</strong></li>
+          <li>会社情報・料金・解約条件を確認</li>
+          <li>不安なら周囲（先生/保護者）へ相談</li>
+        </ul>
+      </aside>
+    </section>
+  </div>
+
+  <div class="modalBackdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="シミュレーションの説明">
+    <div class="modal">
+      <h2>これは授業用のシミュレーションです</h2>
+      <p>
+        この先は「引っかかりやすい広告の構造」を学ぶためのデモです。<br/>
+        <strong>個人情報の入力・送信・決済・外部遷移は一切ありません。</strong><br/>
+        続けると、どこが危険かの解説に進みます。
+      </p>
+      <div class="ctaRow">
+        <button class="btn" id="cancelBtn" type="button">戻る</button>
+        <button class="btn primary" id="continueBtn" type="button">解説へ進む</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tips = document.getElementById('tips');
+      const openTips = document.getElementById('openTips');
+      const applyBtn = document.getElementById('applyBtn');
+
+      const modalBackdrop = document.getElementById('modalBackdrop');
+      const cancelBtn = document.getElementById('cancelBtn');
+      const continueBtn = document.getElementById('continueBtn');
+
+      function showTips() {
+        tips.open = true;
+        tips.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      openTips.addEventListener('click', showTips);
+
+      applyBtn.addEventListener('click', () => {
+        // クリック時に必ず開示（安全設計）
+        modalBackdrop.style.display = 'grid';
+      });
+
+      cancelBtn.addEventListener('click', () => {
+        modalBackdrop.style.display = 'none';
+      });
+
+      continueBtn.addEventListener('click', () => {
+        modalBackdrop.style.display = 'none';
+        showTips();
+      });
+
+      // 背景クリックで閉じる
+      modalBackdrop.addEventListener('click', (e) => {
+        if (e.target === modalBackdrop) modalBackdrop.style.display = 'none';
+      });
+
+      // Escで閉じる
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') modalBackdrop.style.display = 'none';
+      });
+    })();
+  </script>
 </body>
 </html>
