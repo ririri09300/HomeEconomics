@@ -281,7 +281,7 @@
 
   <script>
     (function () {
-      const UNIT = 2980;
+      const UNIT = 90000000;
       const qty = document.getElementById('qty');
       const qtyView = document.getElementById('qtyView');
       const subTotal = document.getElementById('subTotal');
@@ -294,11 +294,11 @@
       function calc(){
         const q = parseInt(qty.value, 10) || 1;
         const sub = UNIT * q;
-        const ship = sub >= 3000 ? 0 : 300;
+        const ship = sub >= 0 ? 0 : 0;
         qtyView.textContent = String(q);
         subTotal.textContent = yen(sub);
         shipping.textContent = yen(ship);
-        total.textContent = yen(sub + ship);
+        total.textContent = yen(sub);
       }
 
       qty.addEventListener('change', calc);
