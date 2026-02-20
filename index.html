@@ -3,139 +3,268 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>NEO Bottle - 商品ページ</title>
+  <title>NEO Store - 商品ページ</title>
   <meta name="description" content="NEO Bottle（架空）の商品紹介ページ" />
   <style>
     :root{
-      --bg:#0b0f17; --card:#121a2a; --text:#e7eefc; --muted:#9db0d0;
-      --line:#22314f; --accent:#8be9fd; --ok:#84fba6;
+      --bg:#e6eef6;         /* うっすら青みのある明るい背景 */
+      --nav:#0f1111;        /* 黒寄りのヘッダー */
+      --nav2:#232f3e;       /* 2段目の濃紺寄り */
+      --card:#ffffff;
+      --text:#111;
+      --muted:#4b5563;
+      --line:#d5dbe3;
+      --accent:#f3a847;     /* “ぽい”が商標そのものではない暖色 */
+      --accent2:#1f6feb;    /* リンクっぽい青 */
+      --shadow:0 6px 18px rgba(17,24,39,.08);
     }
     *{box-sizing:border-box}
     body{
-      margin:0; color:var(--text);
+      margin:0;
       font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-      background:radial-gradient(1000px 600px at 20% 0%, #142040, var(--bg));
+      background:linear-gradient(#f3f6fb, var(--bg));
+      color:var(--text);
     }
-    a{color:inherit}
-    .wrap{max-width:980px; margin:0 auto; padding:22px 16px 56px;}
-    header{display:flex; justify-content:space-between; align-items:center; gap:10px;}
-    .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
-    .logo{width:36px; height:36px; border-radius:12px; background:rgba(139,233,253,.18); border:1px solid rgba(139,233,253,.35);}
+    a{color:var(--accent2); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* top nav */
+    .nav{
+      background:var(--nav);
+      color:#fff;
+    }
+    .nav .inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:10px 14px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center; color:#fff; text-decoration:none;
+      padding:6px 8px; border-radius:10px;
+    }
+    .brand:hover{background:rgba(255,255,255,.08); text-decoration:none}
+    .logo{
+      width:34px; height:34px; border-radius:10px;
+      background:linear-gradient(135deg, rgba(243,168,71,.35), rgba(31,111,235,.25));
+      border:1px solid rgba(255,255,255,.18);
+    }
     .brand b{letter-spacing:.2px}
-    .nav{display:flex; gap:10px; align-items:center;}
-    .pill{font-size:12px; padding:4px 10px; border-radius:999px; border:1px solid var(--line); color:var(--muted);}
-
-    .hero{
-      margin-top:14px;
-      display:grid; gap:14px;
-      padding:18px; border:1px solid var(--line); border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      box-shadow:0 12px 40px rgba(0,0,0,.25);
+    .search{
+      flex:1;
+      display:flex;
+      background:#fff;
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
     }
-    .kicker{color:var(--muted); font-size:13px}
-    h1{margin:0; font-size:26px}
-    .sub{margin:0; color:var(--muted); line-height:1.7}
+    .search select{
+      border:0; background:#f3f4f6; padding:10px 10px; font-size:13px; color:#111;
+      border-right:1px solid #e5e7eb;
+      outline:none;
+    }
+    .search input{
+      flex:1; border:0; padding:10px 12px; font-size:14px; outline:none;
+    }
+    .search button{
+      border:0; padding:10px 14px; background:var(--accent); cursor:pointer; font-weight:800;
+    }
+    .navRight{
+      display:flex; gap:10px; align-items:center; font-size:12px; opacity:.95;
+    }
+    .navChip{
+      padding:6px 8px; border-radius:10px;
+      border:1px solid rgba(255,255,255,.16);
+      color:#fff;
+    }
 
-    .grid{display:grid; gap:12px; grid-template-columns:1fr;}
-    @media (min-width:900px){ .grid{grid-template-columns:1.2fr .8fr;} }
+    /* second nav */
+    .nav2{
+      background:var(--nav2);
+      color:#fff;
+    }
+    .nav2 .inner{
+      max-width:1100px; margin:0 auto;
+      padding:8px 14px;
+      display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+      font-size:13px;
+    }
+    .nav2 a{color:#fff; opacity:.95}
+    .nav2 a:hover{opacity:1; text-decoration:none}
+
+    /* page */
+    .wrap{max-width:1100px; margin:0 auto; padding:18px 14px 56px;}
+    .crumbs{font-size:12px; color:var(--muted); margin:10px 0 12px}
+    .grid{display:grid; gap:14px; grid-template-columns:1fr;}
+    @media (min-width:980px){ .grid{grid-template-columns:1.2fr .8fr;} }
 
     .card{
-      border:1px solid var(--line); border-radius:18px; padding:14px;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:14px;
     }
     .product{
-      display:grid; gap:12px;
-      grid-template-columns:1fr;
+      display:grid; gap:14px; grid-template-columns:1fr;
     }
-    @media (min-width:700px){ .product{grid-template-columns:1fr 1fr;} }
+    @media (min-width:820px){ .product{grid-template-columns:1fr 1.05fr;} }
+
     .ph{
-      border-radius:18px; border:1px dashed rgba(255,255,255,.18);
-      background:rgba(0,0,0,.12);
-      min-height:220px;
+      border-radius:16px;
+      border:1px dashed #cbd5e1;
+      background:linear-gradient(180deg, #fff, #f7fafc);
+      min-height:260px;
       display:grid; place-items:center;
-      color:var(--muted); font-size:13px;
+      color:#6b7280; font-size:13px;
     }
-    .priceRow{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-top:6px;}
-    .price{font-size:26px; font-weight:850;}
+    h1{margin:0; font-size:22px}
+    .sub{margin:8px 0 0; color:var(--muted); line-height:1.7; font-size:14px}
+    .priceRow{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-top:10px;}
+    .price{font-size:26px; font-weight:900;}
     .tax{color:var(--muted); font-size:12px}
-    .stock{font-size:12px; color:rgba(132,251,166,.9); border:1px solid rgba(132,251,166,.35); background:rgba(132,251,166,.10); padding:4px 10px; border-radius:999px;}
+    .badge{
+      font-size:12px; padding:4px 10px; border-radius:999px;
+      border:1px solid #d1fae5; background:#ecfdf5; color:#065f46;
+      font-weight:700;
+    }
 
     .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:11px 14px; border-radius:14px;
-      border:1px solid var(--line);
-      background:#101a2d; color:var(--text);
-      font-weight:750; text-decoration:none;
+      padding:11px 14px; border-radius:12px;
+      border:1px solid #d1d5db;
+      background:#f9fafb;
+      color:#111;
+      font-weight:850;
       cursor:pointer;
+      text-decoration:none;
+      min-width: 180px;
     }
-    .btn.primary{border-color:rgba(139,233,253,.45); background:rgba(139,233,253,.12);}
-    .btn:focus{outline:2px solid rgba(139,233,253,.35); outline-offset:2px}
+    .btn.primary{
+      background:linear-gradient(#ffd978, #f3a847);
+      border-color:#d39b3b;
+    }
+    .btn:hover{text-decoration:none; filter:brightness(.98)}
+    .btn:active{transform:translateY(1px)}
 
-    ul{margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.7; font-size:14px}
-    footer{margin-top:14px; color:var(--muted); font-size:12px; line-height:1.7}
-    .small{font-size:12px; color:var(--muted)}
+    .spec li{margin:6px 0}
+    .divider{height:1px; background:var(--line); margin:12px 0}
+
+    .asideTitle{margin:0 0 8px; font-size:16px}
+    .small{font-size:12px; color:var(--muted); line-height:1.7}
+
+    footer.site{
+      margin-top:18px;
+      background:#0f172a;
+      color:#cbd5e1;
+      padding:18px 14px;
+    }
+    footer.site .inner{
+      max-width:1100px; margin:0 auto; font-size:12px; line-height:1.7;
+      display:flex; gap:18px; flex-wrap:wrap;
+    }
+    footer.site a{color:#cbd5e1; text-decoration:underline}
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <header>
+  <div class="nav">
+    <div class="inner">
       <a class="brand" href="./index.html" aria-label="トップへ">
         <div class="logo" aria-hidden="true"></div>
-        <div><b>NEO Store</b><div class="small">シンプル商品販売ページ</div></div>
+        <div>
+          <div><b>NEO Store</b></div>
+          <div style="font-size:12px; opacity:.85;">Marketplace-ish demo</div>
+        </div>
       </a>
-      <div class="nav">
-        <span class="pill">送料無料：¥3,000〜</span>
-        <span class="pill">翌日発送（平日）</span>
+
+      <div class="search" role="search" aria-label="サイト内検索（見た目だけ）">
+        <select aria-label="カテゴリ">
+          <option>すべて</option>
+          <option>ボトル</option>
+          <option>生活雑貨</option>
+        </select>
+        <input type="search" placeholder="商品を検索（デモ）" />
+        <button type="button" aria-label="検索">🔎</button>
       </div>
-    </header>
 
-    <section class="hero">
-      <div class="kicker">新商品</div>
-      <h1>NEO Bottle 500</h1>
-      <p class="sub">軽量・保温・漏れにくい。必要な機能だけに絞った、毎日使えるボトル。</p>
+      <div class="navRight">
+        <span class="navChip">配送：2〜4日</span>
+        <span class="navChip">送料無料：¥3,000〜</span>
+      </div>
+    </div>
+  </div>
 
-      <div class="grid">
-        <div class="card">
-          <div class="product">
-            <div class="ph">商品画像（ここは後で差し替え可能）</div>
-            <div>
-              <div class="priceRow">
-                <div class="price">¥2,980</div>
-                <div class="tax">税込</div>
-                <span class="stock">在庫あり</span>
-              </div>
+  <div class="nav2">
+    <div class="inner">
+      <a href="#top">カテゴリ</a>
+      <a href="#spec">仕様</a>
+      <a href="#ship">配送</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
 
-              <div class="btnRow">
-                <!-- ★ここが「購入ページへ飛ぶボタン」です -->
-                <a class="btn primary" href="./buy.html">購入ページへ</a>
-                <a class="btn" href="#spec">仕様を見る</a>
-              </div>
+  <div class="wrap" id="top">
+    <div class="crumbs">ホーム ＞ ボトル ＞ NEO Bottle 500</div>
 
-              <ul>
-                <li>容量：500ml</li>
-                <li>保温：6時間 / 保冷：8時間（目安）</li>
-                <li>重量：約210g</li>
-                <li>カラー：ブラック / アイボリー（選択は購入ページ）</li>
-              </ul>
+    <div class="grid">
+      <section class="card">
+        <div class="product">
+          <div class="ph">商品画像（後で差し替え）</div>
+
+          <div>
+            <h1>NEO Bottle 500</h1>
+            <p class="sub">軽量・保温・漏れにくい。必要な機能だけに絞った、毎日使えるボトル。</p>
+
+            <div class="priceRow">
+              <div class="price">¥2,980</div>
+              <div class="tax">税込</div>
+              <span class="badge">在庫あり</span>
+            </div>
+
+            <div class="btnRow">
+              <!-- ★購入ページへ飛ぶボタン -->
+              <a class="btn primary" href="./buy.html">購入ページへ</a>
+              <a class="btn" href="#spec">仕様を見る</a>
+            </div>
+
+            <div class="divider"></div>
+
+            <ul class="spec" id="spec">
+              <li>容量：500ml</li>
+              <li>保温：6時間 / 保冷：8時間（目安）</li>
+              <li>重量：約210g</li>
+              <li>カラー：ブラック / アイボリー（購入ページで選択）</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <div id="ship" class="small">
+              配送：通常 2〜4日（地域により）／ 返品：初期不良は到着7日以内
             </div>
           </div>
         </div>
+      </section>
 
-        <aside class="card" id="spec">
-          <h2 style="margin:0 0 8px; font-size:16px;">仕様・配送</h2>
-          <ul>
-            <li>素材：ステンレス（本体）/ シリコン（パッキン）</li>
-            <li>配送：通常 2〜4日（地域により）</li>
-            <li>保証：初期不良は到着7日以内</li>
-          </ul>
-          <footer>
-            ※このサイトは静的ページのデモです。実決済にする場合は Stripe 等に接続します。
-          </footer>
-        </aside>
-      </div>
-    </section>
+      <aside class="card">
+        <h2 class="asideTitle" id="faq">FAQ</h2>
+        <div class="small">
+          Q. 漏れますか？<br/>A. パッキンが正しく装着されていれば通常は漏れません。<br/><br/>
+          Q. 食洗機OK？<br/>A. フタは手洗い推奨。本体は条件により可。<br/><br/>
+          ※このページは静的デモです。実決済はStripe等の導入が必要です。
+        </div>
+      </aside>
+    </div>
   </div>
+
+  <footer class="site">
+    <div class="inner">
+      <div><b>NEO Store</b><br/>これは架空のデモサイトです。</div>
+      <div>利用規約（デモ） / プライバシー（デモ） / お問い合わせ（デモ）</div>
+    </div>
+  </footer>
 </body>
 </html>
