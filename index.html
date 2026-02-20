@@ -7,16 +7,17 @@
   <meta name="description" content="NEO Bottle（架空）の商品紹介ページ" />
   <style>
     :root{
-      --bg:#e6eef6;         /* うっすら青みのある明るい背景 */
-      --nav:#0f1111;        /* 黒寄りのヘッダー */
-      --nav2:#232f3e;       /* 2段目の濃紺寄り */
+      --bg:#e6eef6;
+      --nav:#0f1111;
+      --nav2:#232f3e;
       --card:#ffffff;
       --text:#111;
       --muted:#4b5563;
       --line:#d5dbe3;
-      --accent:#f3a847;     /* “ぽい”が商標そのものではない暖色 */
-      --accent2:#1f6feb;    /* リンクっぽい青 */
+      --accent:#f3a847;
+      --accent2:#1f6feb;
       --shadow:0 6px 18px rgba(17,24,39,.08);
+      --good:#0f766e;
     }
     *{box-sizing:border-box}
     body{
@@ -28,18 +29,10 @@
     a{color:var(--accent2); text-decoration:none}
     a:hover{text-decoration:underline}
 
-    /* top nav */
-    .nav{
-      background:var(--nav);
-      color:#fff;
-    }
+    .nav{background:var(--nav); color:#fff;}
     .nav .inner{
-      max-width:1100px;
-      margin:0 auto;
-      padding:10px 14px;
-      display:flex;
-      gap:12px;
-      align-items:center;
+      max-width:1100px; margin:0 auto; padding:10px 14px;
+      display:flex; gap:12px; align-items:center;
     }
     .brand{
       display:flex; gap:10px; align-items:center; color:#fff; text-decoration:none;
@@ -53,48 +46,26 @@
     }
     .brand b{letter-spacing:.2px}
     .search{
-      flex:1;
-      display:flex;
-      background:#fff;
-      border-radius:12px;
-      overflow:hidden;
+      flex:1; display:flex; background:#fff; border-radius:12px; overflow:hidden;
       border:1px solid rgba(255,255,255,.12);
     }
     .search select{
       border:0; background:#f3f4f6; padding:10px 10px; font-size:13px; color:#111;
-      border-right:1px solid #e5e7eb;
-      outline:none;
+      border-right:1px solid #e5e7eb; outline:none;
     }
-    .search input{
-      flex:1; border:0; padding:10px 12px; font-size:14px; outline:none;
-    }
-    .search button{
-      border:0; padding:10px 14px; background:var(--accent); cursor:pointer; font-weight:800;
-    }
-    .navRight{
-      display:flex; gap:10px; align-items:center; font-size:12px; opacity:.95;
-    }
-    .navChip{
-      padding:6px 8px; border-radius:10px;
-      border:1px solid rgba(255,255,255,.16);
-      color:#fff;
-    }
+    .search input{flex:1; border:0; padding:10px 12px; font-size:14px; outline:none;}
+    .search button{border:0; padding:10px 14px; background:var(--accent); cursor:pointer; font-weight:800;}
+    .navRight{display:flex; gap:10px; align-items:center; font-size:12px; opacity:.95;}
+    .navChip{padding:6px 8px; border-radius:10px; border:1px solid rgba(255,255,255,.16); color:#fff;}
 
-    /* second nav */
-    .nav2{
-      background:var(--nav2);
-      color:#fff;
-    }
+    .nav2{background:var(--nav2); color:#fff;}
     .nav2 .inner{
-      max-width:1100px; margin:0 auto;
-      padding:8px 14px;
-      display:flex; gap:12px; align-items:center; flex-wrap:wrap;
-      font-size:13px;
+      max-width:1100px; margin:0 auto; padding:8px 14px;
+      display:flex; gap:12px; align-items:center; flex-wrap:wrap; font-size:13px;
     }
     .nav2 a{color:#fff; opacity:.95}
     .nav2 a:hover{opacity:1; text-decoration:none}
 
-    /* page */
     .wrap{max-width:1100px; margin:0 auto; padding:18px 14px 56px;}
     .crumbs{font-size:12px; color:var(--muted); margin:10px 0 12px}
     .grid{display:grid; gap:14px; grid-template-columns:1fr;}
@@ -107,21 +78,37 @@
       box-shadow:var(--shadow);
       padding:14px;
     }
-    .product{
-      display:grid; gap:14px; grid-template-columns:1fr;
-    }
+
+    .product{display:grid; gap:14px; grid-template-columns:1fr;}
     @media (min-width:820px){ .product{grid-template-columns:1fr 1.05fr;} }
 
-    .ph{
+    /* 画像枠 */
+    .imgWrap{
       border-radius:16px;
-      border:1px dashed #cbd5e1;
-      background:linear-gradient(180deg, #fff, #f7fafc);
+      border:1px solid var(--line);
+      background:#fff;
+      overflow:hidden;
       min-height:260px;
-      display:grid; place-items:center;
-      color:#6b7280; font-size:13px;
+      display:grid;
+      place-items:center;
     }
+    .imgWrap img{
+      width:100%;
+      height:100%;
+      max-height:420px;
+      object-fit:cover;
+      display:block;
+    }
+    .imgFallback{
+      padding:24px;
+      color:#6b7280;
+      font-size:13px;
+      text-align:center;
+    }
+
     h1{margin:0; font-size:22px}
     .sub{margin:8px 0 0; color:var(--muted); line-height:1.7; font-size:14px}
+
     .priceRow{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-top:10px;}
     .price{font-size:26px; font-weight:900;}
     .tax{color:var(--muted); font-size:12px}
@@ -130,6 +117,11 @@
       border:1px solid #d1fae5; background:#ecfdf5; color:#065f46;
       font-weight:700;
     }
+
+    .ratingRow{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:8px;}
+    .stars{font-size:14px; letter-spacing:.5px}
+    .score{font-weight:800}
+    .count{font-size:12px; color:var(--muted)}
 
     .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
     .btn{
@@ -150,11 +142,45 @@
     .btn:hover{text-decoration:none; filter:brightness(.98)}
     .btn:active{transform:translateY(1px)}
 
-    .spec li{margin:6px 0}
     .divider{height:1px; background:var(--line); margin:12px 0}
+    ul.spec{margin:0; padding-left:18px; color:var(--muted); line-height:1.7; font-size:14px}
+    ul.spec li{margin:6px 0}
 
     .asideTitle{margin:0 0 8px; font-size:16px}
     .small{font-size:12px; color:var(--muted); line-height:1.7}
+
+    /* レビュー */
+    .reviewsHeader{
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .reviewSummary{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#f8fafc;
+    }
+    .meter{
+      width:140px; height:8px; border-radius:999px; background:#e5e7eb; overflow:hidden;
+      border:1px solid #e5e7eb;
+    }
+    .meter > span{display:block; height:100%; width:0%; background:linear-gradient(90deg, #16a34a, #22c55e);}
+    .reviewList{display:grid; gap:10px; margin-top:10px;}
+    .review{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:#fff;
+    }
+    .reviewTop{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center;}
+    .reviewName{font-weight:850}
+    .reviewMeta{font-size:12px; color:var(--muted)}
+    .reviewBody{margin-top:6px; color:#111; line-height:1.7; font-size:14px}
+    .pill{
+      font-size:12px; padding:4px 10px; border-radius:999px;
+      border:1px solid #c7d2fe; background:#eef2ff; color:#3730a3; font-weight:700;
+    }
 
     footer.site{
       margin-top:18px;
@@ -177,7 +203,7 @@
         <div class="logo" aria-hidden="true"></div>
         <div>
           <div><b>NEO Store</b></div>
-          <div style="font-size:12px; opacity:.85;">Marketplace-ish demo</div>
+          <div style="font-size:12px; opacity:.85;">EC style demo</div>
         </div>
       </a>
 
@@ -200,9 +226,9 @@
 
   <div class="nav2">
     <div class="inner">
-      <a href="#top">カテゴリ</a>
+      <a href="#top">商品</a>
       <a href="#spec">仕様</a>
-      <a href="#ship">配送</a>
+      <a href="#reviews">レビュー</a>
       <a href="#faq">FAQ</a>
     </div>
   </div>
@@ -213,11 +239,22 @@
     <div class="grid">
       <section class="card">
         <div class="product">
-          <div class="ph">商品画像（後で差し替え）</div>
+          <!-- 画像（assets/bottle.jpg を置くと表示されます） -->
+          <div class="imgWrap">
+            <img src="./assets/bottle.jpg" alt="NEO Bottle 500の写真"
+                 onerror="this.remove(); this.parentNode.innerHTML = '<div class=&quot;imgFallback&quot;>画像が見つかりません。<br/>リポジトリに <b>assets/bottle.jpg</b> を置くと表示されます。</div>';">
+          </div>
 
           <div>
             <h1>NEO Bottle 500</h1>
             <p class="sub">軽量・保温・漏れにくい。必要な機能だけに絞った、毎日使えるボトル。</p>
+
+            <div class="ratingRow" aria-label="評価">
+              <div class="stars" aria-hidden="true">★★★★☆</div>
+              <div class="score">4.3</div>
+              <div class="count">（レビュー 128 件）</div>
+              <span class="pill">売れ筋</span>
+            </div>
 
             <div class="priceRow">
               <div class="price">¥2,980</div>
@@ -226,9 +263,8 @@
             </div>
 
             <div class="btnRow">
-              <!-- ★購入ページへ飛ぶボタン -->
               <a class="btn primary" href="./buy.html">購入ページへ</a>
-              <a class="btn" href="#spec">仕様を見る</a>
+              <a class="btn" href="#reviews">レビューを見る</a>
             </div>
 
             <div class="divider"></div>
@@ -242,9 +278,57 @@
 
             <div class="divider"></div>
 
-            <div id="ship" class="small">
+            <div class="small">
               配送：通常 2〜4日（地域により）／ 返品：初期不良は到着7日以内
             </div>
+          </div>
+        </div>
+
+        <!-- レビュー枠 -->
+        <div id="reviews" class="divider"></div>
+        <div class="reviewsHeader">
+          <h2 style="margin:0; font-size:16px;">カスタマーレビュー</h2>
+          <div class="reviewSummary">
+            <div><b>4.3</b> / 5</div>
+            <div class="meter" aria-label="満足度">
+              <span id="meterFill"></span>
+            </div>
+            <div class="small">128件</div>
+          </div>
+        </div>
+
+        <div class="reviewList" aria-label="レビュー一覧">
+          <div class="review">
+            <div class="reviewTop">
+              <div>
+                <div class="reviewName">山田さん</div>
+                <div class="reviewMeta">★★★★☆ ・ 2026/02/18</div>
+              </div>
+              <div class="small">カラー：ブラック / 1本</div>
+            </div>
+            <div class="reviewBody">持ち運びが軽いのに保冷がちゃんと効きます。フタの閉まりも良い。</div>
+          </div>
+
+          <div class="review">
+            <div class="reviewTop">
+              <div>
+                <div class="reviewName">S.K.</div>
+                <div class="reviewMeta">★★★★★ ・ 2026/02/12</div>
+              </div>
+              <div class="small">カラー：アイボリー / 2本</div>
+            </div>
+            <div class="reviewBody">デザインがシンプルで机に置いても浮かない。パッキンも洗いやすい。</div>
+          </div>
+
+          <div class="review">
+            <div class="reviewTop">
+              <div>
+                <div class="reviewName">匿名</div>
+                <div class="reviewMeta">★★★☆☆ ・ 2026/01/29</div>
+              </div>
+              <div class="small">カラー：ブラック / 1本</div>
+            </div>
+            <div class="reviewBody">保温はそこそこ。軽さ優先ならアリ。ふたのパーツは無くさないよう注意。</div>
           </div>
         </div>
       </section>
@@ -254,7 +338,7 @@
         <div class="small">
           Q. 漏れますか？<br/>A. パッキンが正しく装着されていれば通常は漏れません。<br/><br/>
           Q. 食洗機OK？<br/>A. フタは手洗い推奨。本体は条件により可。<br/><br/>
-          ※このページは静的デモです。実決済はStripe等の導入が必要です。
+          ※このページは架空のデモです（実決済は未実装）。
         </div>
       </aside>
     </div>
@@ -266,5 +350,15 @@
       <div>利用規約（デモ） / プライバシー（デモ） / お問い合わせ（デモ）</div>
     </div>
   </footer>
+
+  <script>
+    // 満足度バー（4.3/5 → 86%）
+    (function(){
+      const score = 4.3;
+      const pct = Math.max(0, Math.min(100, (score/5)*100));
+      const fill = document.getElementById('meterFill');
+      if (fill) fill.style.width = pct.toFixed(0) + '%';
+    })();
+  </script>
 </body>
 </html>
