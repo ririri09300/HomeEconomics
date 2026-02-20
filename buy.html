@@ -3,88 +3,227 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>NEO Bottle 500 - 購入ページ</title>
+  <title>アマ・ゾーン - 購入ページ</title>
   <meta name="description" content="購入ページ（静的デモ）" />
   <style>
     :root{
-      --bg:#0b0f17; --card:#121a2a; --text:#e7eefc; --muted:#9db0d0;
-      --line:#22314f; --accent:#8be9fd; --warn:#ffcc66;
+      --bg:#e6eef6;
+      --nav:#0f1111;
+      --nav2:#232f3e;
+      --card:#ffffff;
+      --text:#111;
+      --muted:#4b5563;
+      --line:#d5dbe3;
+      --accent:#f3a847;
+      --accent2:#1f6feb;
+      --shadow:0 6px 18px rgba(17,24,39,.08);
     }
     *{box-sizing:border-box}
     body{
-      margin:0; color:var(--text);
+      margin:0;
       font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-      background:radial-gradient(1000px 600px at 20% 0%, #142040, var(--bg));
+      background:linear-gradient(#f3f6fb, var(--bg));
+      color:var(--text);
     }
-    .wrap{max-width:980px; margin:0 auto; padding:22px 16px 56px;}
-    a{color:inherit}
-    header{display:flex; justify-content:space-between; align-items:center; gap:10px;}
-    .btnLink{color:var(--accent); text-decoration:none; font-weight:700}
-    .card{
-      margin-top:14px;
-      border:1px solid var(--line); border-radius:18px; padding:14px;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
-    }
-    h1{margin:0; font-size:20px}
-    .muted{color:var(--muted)}
-    .grid{display:grid; gap:12px; grid-template-columns:1fr;}
-    @media (min-width:900px){ .grid{grid-template-columns:1.2fr .8fr;} }
+    a{color:var(--accent2); text-decoration:none}
+    a:hover{text-decoration:underline}
 
+    .nav{background:var(--nav); color:#fff;}
+    .nav .inner{
+      max-width:1100px; margin:0 auto; padding:10px 14px;
+      display:flex; gap:12px; align-items:center;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center; color:#fff; text-decoration:none;
+      padding:6px 8px; border-radius:10px;
+    }
+    .brand:hover{background:rgba(255,255,255,.08); text-decoration:none}
+    .logo{
+      width:34px; height:34px; border-radius:10px;
+      background:linear-gradient(135deg, rgba(243,168,71,.35), rgba(31,111,235,.25));
+      border:1px solid rgba(255,255,255,.18);
+    }
+    .brand b{letter-spacing:.2px}
+    .search{
+      flex:1; display:flex; background:#fff; border-radius:12px; overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .search select{
+      border:0; background:#f3f4f6; padding:10px 10px; font-size:13px; color:#111;
+      border-right:1px solid #e5e7eb; outline:none;
+    }
+    .search input{flex:1; border:0; padding:10px 12px; font-size:14px; outline:none;}
+    .search button{border:0; padding:10px 14px; background:var(--accent); cursor:pointer; font-weight:800;}
+    .navRight{display:flex; gap:10px; align-items:center; font-size:12px; opacity:.95;}
+    .navChip{padding:6px 8px; border-radius:10px; border:1px solid rgba(255,255,255,.16); color:#fff;}
+
+    .nav2{background:var(--nav2); color:#fff;}
+    .nav2 .inner{
+      max-width:1100px; margin:0 auto; padding:8px 14px;
+      display:flex; gap:12px; align-items:center; flex-wrap:wrap; font-size:13px;
+    }
+    .nav2 a{color:#fff; opacity:.95}
+    .nav2 a:hover{opacity:1; text-decoration:none}
+
+    .wrap{max-width:1100px; margin:0 auto; padding:18px 14px 56px;}
+    .crumbs{font-size:12px; color:var(--muted); margin:10px 0 12px}
+
+    .grid{display:grid; gap:14px; grid-template-columns:1fr;}
+    @media (min-width:980px){ .grid{grid-template-columns:1.2fr .8fr;} }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    /* 左側：商品ミニ表示 */
+    .mini{
+      display:flex; gap:12px; align-items:flex-start;
+    }
+    .imgWrap{
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:#fff;
+      overflow:hidden;
+      padding:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:160px;
+      height:160px;
+      flex:0 0 auto;
+    }
+    .imgWrap img{
+      width:auto;
+      height:auto;
+      max-width:140px;
+      max-height:140px;
+      display:block;
+    }
+    .title{margin:0; font-size:18px}
+    .muted{color:var(--muted); font-size:13px; line-height:1.7; margin:6px 0 0}
+
+    /* フォーム */
     label{display:block; font-size:13px; color:var(--muted); margin:10px 0 6px}
     input, select{
       width:100%;
       padding:10px 12px;
-      border-radius:14px;
+      border-radius:12px;
       border:1px solid var(--line);
-      background:#0f1729;
-      color:var(--text);
+      background:#fff;
+      color:#111;
     }
-    input:focus, select:focus{outline:2px solid rgba(139,233,253,.35); outline-offset:2px}
+    input:focus, select:focus{outline:2px solid rgba(31,111,235,.25); outline-offset:2px}
 
     .row{display:grid; gap:10px; grid-template-columns:1fr;}
     @media (min-width:640px){ .row{grid-template-columns:1fr 1fr;} }
 
-    .summary{
-      border:1px solid var(--line); border-radius:18px; padding:14px;
-      background:rgba(0,0,0,.10);
-    }
-    .line{display:flex; justify-content:space-between; gap:12px; margin-top:8px; color:var(--muted); font-size:14px}
-    .total{display:flex; justify-content:space-between; gap:12px; margin-top:12px; font-weight:850; font-size:16px}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:11px 14px; border-radius:14px;
-      border:1px solid var(--line);
-      background:#101a2d; color:var(--text);
-      font-weight:750; text-decoration:none;
+      padding:11px 14px; border-radius:12px;
+      border:1px solid #d1d5db;
+      background:#f9fafb;
+      color:#111;
+      font-weight:850;
       cursor:pointer;
+      text-decoration:none;
       width:100%;
       margin-top:12px;
     }
-    .btn.primary{border-color:rgba(139,233,253,.45); background:rgba(139,233,253,.12);}
+    .btn.primary{
+      background:linear-gradient(#ffd978, #f3a847);
+      border-color:#d39b3b;
+    }
+    .btn:hover{text-decoration:none; filter:brightness(.98)}
+    .btn:active{transform:translateY(1px)}
+
+    /* 右側：注文サマリ */
+    .summary{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fff;
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+    .line{display:flex; justify-content:space-between; gap:12px; margin-top:8px; color:var(--muted); font-size:14px}
+    .total{display:flex; justify-content:space-between; gap:12px; margin-top:12px; font-weight:900; font-size:16px}
     .note{
       margin-top:10px; font-size:12px; color:var(--muted); line-height:1.7;
-      border:1px solid rgba(255,204,102,.25);
-      background:rgba(255,204,102,.08);
-      padding:10px 12px; border-radius:16px;
+      border:1px solid rgba(243,168,71,.35);
+      background:rgba(243,168,71,.12);
+      padding:10px 12px; border-radius:14px;
     }
+
+    footer.site{
+      margin-top:18px;
+      background:#0f172a;
+      color:#cbd5e1;
+      padding:18px 14px;
+    }
+    footer.site .inner{
+      max-width:1100px; margin:0 auto; font-size:12px; line-height:1.7;
+      display:flex; gap:18px; flex-wrap:wrap;
+    }
+    footer.site a{color:#cbd5e1; text-decoration:underline}
   </style>
 </head>
 
 <body>
+  <div class="nav">
+    <div class="inner">
+      <a class="brand" href="./index.html" aria-label="トップへ">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div><b>NEO Store</b></div>
+          <div style="font-size:12px; opacity:.85;">EC style demo</div>
+        </div>
+      </a>
+
+      <div class="search" role="search" aria-label="サイト内検索（見た目だけ）">
+        <select aria-label="カテゴリ">
+          <option>すべて</option>
+          <option>ボトル</option>
+          <option>生活雑貨</option>
+        </select>
+        <input type="search" placeholder="商品を検索（デモ）" />
+        <button type="button" aria-label="検索">🔎</button>
+      </div>
+
+      <div class="navRight">
+        <span class="navChip">配送：2〜4日</span>
+        <span class="navChip">送料無料：¥3,000〜</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav2">
+    <div class="inner">
+      <a href="./index.html#top">商品</a>
+      <a href="#order">購入手続き</a>
+      <a href="#summary">注文内容</a>
+    </div>
+  </div>
+
   <div class="wrap">
-    <header>
-      <a class="btnLink" href="./index.html">← 商品ページへ戻る</a>
-      <span class="muted" style="font-size:12px;">購入ページ（静的デモ）</span>
-    </header>
+    <div class="crumbs">ホーム ＞ ボトル ＞ NEO Bottle 500 ＞ 購入</div>
 
-    <div class="card">
-      <h1>NEO Bottle 500 - 購入ページ</h1>
-      <p class="muted" style="margin:6px 0 0; line-height:1.7;">
-        ここでは「購入フローの見た目」までを実装しています。送信・決済は行いません。
-      </p>
+    <div class="grid">
+      <section class="card" id="order">
+        <div class="mini">
+          <div class="imgWrap" aria-label="商品画像">
+            <img src="./assets/bottle.png" alt="NEO Bottle 500の写真"
+                 onerror="this.remove(); this.parentNode.innerHTML='画像なし';">
+          </div>
+          <div>
+            <h1 class="title">NEO Bottle 500</h1>
+            <p class="muted">購入情報を入力してください（静的デモ：送信・決済は行いません）。</p>
+          </div>
+        </div>
 
-      <div class="grid" style="margin-top:12px;">
-        <form id="orderForm" class="card" style="margin:0; padding:14px;">
+        <form id="orderForm" style="margin-top:12px;">
           <div class="row">
             <div>
               <label for="color">カラー</label>
@@ -103,7 +242,7 @@
             </div>
           </div>
 
-          <label for="name">お名前</label>
+          <label for="name">お名前（任意）</label>
           <input id="name" name="name" type="text" placeholder="例：山田 太郎" />
 
           <label for="email">メール（任意）</label>
@@ -115,24 +254,31 @@
           <button class="btn primary" type="submit">購入を確定（デモ）</button>
 
           <div class="note">
-            ※このページは静的デモのため、入力内容は保存されません。<br/>
-            実際に販売する場合は、決済（Stripe等）と注文管理（サーバー）が必要です。
+            ※デモのため入力内容は保存されません。<br/>
+            実販売にする場合は Stripe/Shopify/BASE などの決済導入が必要です。
           </div>
         </form>
+      </section>
 
-        <aside class="summary">
-          <div style="font-weight:850;">ご注文内容</div>
-          <div class="line"><span>商品</span><span>NEO Bottle 500</span></div>
-          <div class="line"><span>単価</span><span id="unitPrice">¥2,980</span></div>
-          <div class="line"><span>数量</span><span id="qtyView">1</span></div>
-          <div class="line"><span>小計</span><span id="subTotal">¥2,980</span></div>
-          <div class="line"><span>送料</span><span id="shipping">¥300</span></div>
-          <div class="total"><span>合計</span><span id="total">¥3,280</span></div>
-          <a class="btn" href="./index.html" style="margin-top:10px;">商品ページを見直す</a>
-        </aside>
-      </div>
+      <aside class="summary" id="summary">
+        <div style="font-weight:900;">注文内容</div>
+        <div class="line"><span>商品</span><span>NEO Bottle 500</span></div>
+        <div class="line"><span>単価</span><span id="unitPrice">¥2,980</span></div>
+        <div class="line"><span>数量</span><span id="qtyView">1</span></div>
+        <div class="line"><span>小計</span><span id="subTotal">¥2,980</span></div>
+        <div class="line"><span>送料</span><span id="shipping">¥300</span></div>
+        <div class="total"><span>合計</span><span id="total">¥3,280</span></div>
+        <a class="btn" href="./index.html" style="margin-top:10px;">商品ページへ戻る</a>
+      </aside>
     </div>
   </div>
+
+  <footer class="site">
+    <div class="inner">
+      <div><b>NEO Store</b><br/>これは架空のデモサイトです。</div>
+      <div>利用規約（デモ） / プライバシー（デモ） / お問い合わせ（デモ）</div>
+    </div>
+  </footer>
 
   <script>
     (function () {
@@ -149,7 +295,7 @@
       function calc(){
         const q = parseInt(qty.value, 10) || 1;
         const sub = UNIT * q;
-        const ship = sub >= 3000 ? 0 : 300; // 例：3000円以上送料無料
+        const ship = sub >= 3000 ? 0 : 300;
         qtyView.textContent = String(q);
         subTotal.textContent = yen(sub);
         shipping.textContent = yen(ship);
@@ -161,7 +307,6 @@
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        // 静的デモなので送信せず、完了ページへ移動
         const params = new URLSearchParams(new FormData(form));
         window.location.href = "./success.html?" + params.toString();
       });
