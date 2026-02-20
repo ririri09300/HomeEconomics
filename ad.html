@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>広告 - アマ・ゾーン</title>
+  <meta name="description" content="広告ページ（デモ）" />
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:#121a2a;
+      --text:#e7eefc;
+      --muted:#9db0d0;
+      --line:#22314f;
+      --accent:#f3a847;
+      --accent2:#1f6feb;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(31,111,235,.22), transparent 60%),
+        radial-gradient(1000px 600px at 80% 20%, rgba(243,168,71,.22), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      min-height:100svh;
+      display:grid;
+      place-items:center;
+      padding:18px;
+    }
+    .frame{
+      width:min(980px, 100%);
+      display:grid;
+      gap:12px;
+    }
+    .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .pill{
+      border:1px solid rgba(255,255,255,.14);
+      padding:5px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      color:rgba(231,238,252,.92);
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      padding:14px;
+      box-shadow:0 18px 60px rgba(0,0,0,.35);
+    }
+    .grid{
+      display:grid;
+      gap:14px;
+      grid-template-columns:1fr;
+    }
+    @media (min-width:860px){
+      .grid{ grid-template-columns: 1fr .55fr; align-items:start; }
+    }
+
+    /* ポスター枠 */
+    .poster{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      overflow:hidden;
+      background:rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+      min-height:360px;
+    }
+    .poster img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    .fallback{
+      padding:18px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .h{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:900;
+      text-decoration:none;
+      cursor:pointer;
+      min-width:200px;
+    }
+    .btn.primary{
+      border-color: rgba(243,168,71,.45);
+      background: linear-gradient(rgba(255,217,120,.20), rgba(243,168,71,.22));
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    .fine{
+      margin-top:10px;
+      font-size:11px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    a{ color: var(--accent2); }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="top">
+      <span class="pill">広告ページ（デモ）</span>
+      <span>このページは外部送信・決済をしません</span>
+    </div>
+
+    <section class="card">
+      <div class="grid">
+        <div class="poster" aria-label="ポスター">
+          <img src="./assets/poster.png" alt="アマ・ゾーン 広告ポスター"
+               onerror="this.remove(); this.parentNode.innerHTML =
+                 '<div class=&quot;fallback&quot;>ポスター画像が見つかりません。<br>リポジトリに <b>assets/poster.png</b> を置いてください。</div>';">
+        </div>
+
+        <div>
+          <h1 class="h">期間限定セール（デモ）</h1>
+          <p class="p">
+            通学・部活・自習向けの定番アイテムをまとめて掲載中。<br>
+            入口はここ、店内はボタンから。
+          </p>
+
+          <div class="ctaRow">
+            <a class="btn primary" href="./index.html">アマ・ゾーンへ入る</a>
+            <a class="btn" href="./index.html#reviews">レビューを見る</a>
+          </div>
+
+          <div class="fine">
+            ※これは授業/制作向けの静的デモです。<br>
+            画像は <b>assets/poster.png</b> を差し替えるだけで変更できます。
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
