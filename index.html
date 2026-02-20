@@ -82,28 +82,31 @@
     .product{display:grid; gap:14px; grid-template-columns:1fr;}
     @media (min-width:820px){ .product{grid-template-columns:1fr 1.05fr;} }
 
- /* 画像枠 */
-/* 画像枠：枠は小さめ、画像は最大サイズで制限して中央寄せ */
-.imgWrap{
-  border-radius:16px;
-  border:1px solid var(--line);
-  background:#fff;
-  overflow:hidden;
-  padding:16px;          /* 余白 */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height:auto;           /* ←固定高さをやめる（重要） */
-}
-
-.imgWrap img{
-  width:auto;            /* ←100%をやめる（重要） */
-  height:auto;           /* ←100%をやめる（重要） */
-  max-width:320px;       /* ★ここで“画像サイズ”を決める */
-  max-height:320px;      /* ★ここも */
-  display:block;
-}
-}
+    /* 画像枠（画像を確実に小さくする版） */
+    .imgWrap{
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:#fff;
+      overflow:hidden;
+      padding:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:auto;
+    }
+    .imgWrap img{
+      width:auto;
+      height:auto;
+      max-width:320px;     /* ★ここで“画像サイズ”を調整 */
+      max-height:320px;    /* ★ここも */
+      display:block;
+    }
+    .imgFallback{
+      padding:24px;
+      color:#6b7280;
+      font-size:13px;
+      text-align:center;
+    }
 
     h1{margin:0; font-size:22px}
     .sub{margin:8px 0 0; color:var(--muted); line-height:1.7; font-size:14px}
@@ -238,10 +241,10 @@
     <div class="grid">
       <section class="card">
         <div class="product">
-         <img src="./assets/bottle.png" alt="NEO Bottle 500の写真">
+          <!-- 画像はここ1枚だけ（枠の中に入れる） -->
           <div class="imgWrap">
-            <img src="./assets/bottle.jpg" alt="NEO Bottle 500の写真"
-                 onerror="this.remove(); this.parentNode.innerHTML = '<div class=&quot;imgFallback&quot;>画像が見つかりません。<br/>リポジトリに <b>assets/bottle.jpg</b> を置くと表示されます。</div>';">
+            <img src="./assets/bottle.png" alt="NEO Bottle 500の写真"
+                 onerror="this.remove(); this.parentNode.innerHTML = '<div class=&quot;imgFallback&quot;>画像が見つかりません。<br/>リポジトリに <b>assets/bottle.png</b> を置くと表示されます。</div>';">
           </div>
 
           <div>
